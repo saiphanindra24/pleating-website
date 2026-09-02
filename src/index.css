@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Great Vibes", "Segoe Script", cursive;
+
+  /* Ivory / cream base */
+  --color-cream-50: #fefcf8;
+  --color-cream-100: #fbf6ee;
+  --color-cream-200: #f5ebdc;
+  --color-cream-300: #eddfc8;
+
+  /* Dark maroon / burgundy text */
+  --color-maroon-950: #33091b;
+  --color-maroon-900: #470e26;
+  --color-maroon-800: #5c1330;
+  --color-maroon-700: #711b3c;
+  --color-maroon-600: #8a254c;
+
+  /* Pink / magenta accents */
+  --color-magenta-700: #8e174d;
+  --color-magenta-600: #a81c5c;
+  --color-magenta-500: #c22a6e;
+  --color-magenta-300: #e58bb1;
+  --color-magenta-100: #f8dde9;
+  --color-magenta-50: #fcf0f5;
+
+  /* Subtle gold */
+  --color-gold-700: #8f6b1f;
+  --color-gold-600: #a67f2e;
+  --color-gold-500: #be9440;
+  --color-gold-400: #d2af62;
+  --color-gold-300: #e3c98f;
+  --color-gold-200: #eeddb4;
+  --color-gold-100: #f6ecd4;
+
+  /* WhatsApp green */
+  --color-wa-700: #0e6f64;
+  --color-wa-600: #128c7e;
+  --color-wa-500: #1bab8f;
+  --color-wa-400: #25d366;
+
+  --animate-floaty: floaty 6s ease-in-out infinite;
+  --animate-floaty-slow: floaty 8s ease-in-out 1s infinite;
+  --animate-spin-slower: spin 60s linear infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.6s ease-in-out infinite;
+
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(0.82);
+    }
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-base font-bold tracking-wide transition-all duration-300 select-none;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+  }
+  body {
+    background-color: var(--color-cream-100);
+    color: var(--color-maroon-900);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background-color: var(--color-magenta-600);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .btn-wa {
+    @apply btn bg-wa-600 text-white shadow-lg shadow-wa-600/25 hover:-translate-y-0.5 hover:bg-wa-700 hover:shadow-xl hover:shadow-wa-700/30 active:translate-y-0;
+  }
+  .btn-magenta {
+    @apply btn bg-magenta-600 text-white shadow-lg shadow-magenta-600/25 hover:-translate-y-0.5 hover:bg-magenta-700 hover:shadow-xl active:translate-y-0;
+  }
+  .btn-maroon {
+    @apply btn bg-maroon-800 text-cream-100 shadow-lg shadow-maroon-900/25 hover:-translate-y-0.5 hover:bg-maroon-700 active:translate-y-0;
+  }
+  .btn-outline {
+    @apply btn border-2 border-maroon-800/30 bg-transparent text-maroon-800 hover:border-magenta-600 hover:bg-magenta-50 hover:text-magenta-700;
+  }
+  .btn-outline-cream {
+    @apply btn border-2 border-cream-100/40 text-cream-100 hover:border-gold-300 hover:bg-cream-100/10 hover:text-gold-200;
+  }
+
+  .card {
+    @apply rounded-3xl border border-gold-500/25 bg-cream-50 shadow-[0_2px_18px_rgba(92,19,48,0.06)] transition-all duration-300;
+  }
+  .card-hover {
+    @apply hover:-translate-y-1.5 hover:border-gold-500/50 hover:shadow-[0_18px_40px_rgba(92,19,48,0.14)];
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-extrabold tracking-[0.32em] uppercase;
+  }
+
+  /* Saree-inspired paisley motif background */
+  .pattern-paisley {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23be9440' stroke-opacity='0.16' stroke-width='1.1'%3E%3Cpath d='M42 10c11 9 16 18 16 27s-7 16-16 16-16-7-16-16 5-18 16-27z'/%3E%3Ccircle cx='42' cy='36' r='5.5'/%3E%3Cpath d='M10 66c7-5 14-5 21 0M53 66c7-5 14-5 21 0'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 84px 84px;
+  }
+  .pattern-paisley-light {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f6ecd4' stroke-opacity='0.14' stroke-width='1.1'%3E%3Cpath d='M42 10c11 9 16 18 16 27s-7 16-16 16-16-7-16-16 5-18 16-27z'/%3E%3Ccircle cx='42' cy='36' r='5.5'/%3E%3Cpath d='M10 66c7-5 14-5 21 0M53 66c7-5 14-5 21 0'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 84px 84px;
+  }
+
+  /* Temple-border zigzag strip */
+  .temple-strip {
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'%3E%3Cpath d='M0 9L7 1.5 14 9 21 1.5 28 9' fill='none' stroke='%23be9440' stroke-width='1.3' stroke-opacity='0.55'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      opacity 0.75s ease,
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-floaty,
+  .animate-floaty-slow,
+  .animate-spin-slower,
+  .animate-marquee,
+  .animate-pulse-soft {
+    animation: none !important;
+  }
+}
